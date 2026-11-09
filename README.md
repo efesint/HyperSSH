@@ -19,8 +19,8 @@ The project **must** live in `~/HyperSSH`. The config path is hardcoded to
 ```sh
 git clone https://github.com/efesint/HyperSSH.git ~/HyperSSH
 cd ~/HyperSSH
-g++ -std=c++17 src/HyperSSH.cpp -lyaml-cpp -o hyperssh
-sudo mv hyperssh /usr/local/bin/
+make
+sudo make install
 ```
 
 > **Important:** if there is no `~/HyperSSH/` folder in your home directory,
