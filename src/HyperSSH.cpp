@@ -170,7 +170,27 @@ return count == 4;
     std::cout << "Server not found.\n";
   }
 
-  int main() {
+  int list_servers() {
+   std::ifstream f(path);
+
+    if(!f.is_open()) {
+     std::cerr << "Cannot open file. Check if servers.yaml is exist" << std::endl;
+     return 1;
+    }
+   std::cout << f.rdbuf() << std::endl;
+ 
+   return 0;
+   
+  }
+
+  int help() {
+   std::cout << " -h | --help = list of all commands" << std::endl;
+   std::cout << " -m | --menu = return menu" << std::endl;
+   std::cout << " -l | --list = list of all servers" << std::endl;
+   return 0;
+  }
+
+  int menu() {
     banner();
     int choice;  
 
@@ -197,3 +217,24 @@ return count == 4;
     }
    return 0;
   }
+
+  int main(int argc, char* argv[]) {
+    if(argc < 2) {
+      return menu();
+    }
+
+    std::string ar = argv[1];
+    if (ar == "-h" || ar == "--help"){
+        return help();
+    } 
+    if (ar == "-m" || ar == "--menu") {
+        return menu();
+    }
+    if (ar == "-l" || ar == "--list") {
+      return list_servers();
+    }
+
+return 0;
+
+   
+}
