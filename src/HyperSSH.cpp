@@ -105,11 +105,27 @@ return count == 4;
         std::cout << "Invalid IPv4 address!" << std::endl;
         return;
       }
-      port = std::stoi(port_str);
-        if (!check_port(port)) {
-          std::cout << "Invalid port (1-65535)!\n";
-          return;
-       }
+
+
+bool valid_port = true;
+
+try {
+    size_t pos;
+    port = std::stoi(port_str, &pos);
+
+    if (pos != port_str.size() || !check_port(port)) {
+        valid_port = false;
+    }
+}
+catch (const std::exception&) {
+    valid_port = false;
+}
+
+if (!valid_port) {
+    std::cout << "Invalid port (1-65535)!\n";
+    return;
+}
+
 
       std::ofstream ffile(path);
 
